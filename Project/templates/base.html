@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trippy</title>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('main.home') }}" class="navbar-item">
+            Home
+          </a>
+          <a href="{{ url_for('main.collection') }}" class="navbar-item">
+            Itineraries
+          </a>
+        {% endif %}
+        {% if not current_user.is_authenticated %}
+          <a href="{{ url_for('main.index') }}" class="navbar-item">
+            Home
+          </a>
+          <a href="{{ url_for('auth.login_post') }}" class="navbar-item">
+            Login
+          </a>
+          <a href="{{ url_for('auth.signup_post') }}" class="navbar-item">
+            Sign Up
+          </a>
+        {% endif %}
+        {% if current_user.is_authenticated %}
+          <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+            Logout
+          </a>
+        {% endif %}
+        </div>
+      </nav>
+
+      <div class="container has-text-centered">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </body>
+
+</html>
