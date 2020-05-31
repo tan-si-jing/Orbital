@@ -26,14 +26,22 @@ class Itinerary_Items(db.Model):
     item_id = db.Column(db.Integer, primary_key=True)
     itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.itnry_id'), nullable=False)
     location = db.Column(db.String(100), nullable=False)
-    city = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), db.ForeignKey('city.city_name'), nullable=False)
     date = db.Column(db.Date, nullable=False)
     time = db.Column(db.Time, nullable=False)
     comments = db.Column(db.String(100))
 
 class City(db.Model):
-    city_id = db.Column(db.String(100), primary_key=True)
+    city_name = db.Column(db.String(100), primary_key=True)
+    country = db.Column(db.String(100), nullable=False)
 
 class Cities_Itin(db.Model):
-    city_id = db.Column(db.String(100), db.ForeignKey('city.city_id'), primary_key=True)
+    city = db.Column(db.String(100), db.ForeignKey('city.city_name'), primary_key=True)
     itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.itnry_id'), primary_key=True)
+
+class Accomodation(db.Model):
+    itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.itnry_id'), primary_key=True)
+    date = db.Column(db.Date, nullable=False, primary_key=True)
+    morning = db.Column(db.Boolean, primary_key=True)
+    location = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), db.ForeignKey('city.city_name'))
