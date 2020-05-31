@@ -10,7 +10,7 @@ def create_app():
 
     app.config['SECRET_KEY'] = 'tansijing'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://master:orbital2020@orbital.cdqplxkevedc.us-east-2.rds.amazonaws.com/orbital'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:orbital2020@orbital.cczwsyqj7zab.ap-southeast-1.rds.amazonaws.com/Orbital'
     #'mysql://sql12344295:IG4T3KWwt4@sql12.freemysqlhosting.net/sql12344295'
 
     db.init_app(app)
