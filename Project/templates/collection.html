@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <ul>
+    {% for itn in itineraries %}
+        <li>{{ itn.name }}</li>
+    {% else %}
+        <h2>Nothing here yet...create your next getaway with us!</h2>
+    {% endfor %}
+  </ul>
+{% endblock %}
