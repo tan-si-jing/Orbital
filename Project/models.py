@@ -27,9 +27,10 @@ class Itinerary_Items(db.Model):
     itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.itnry_id'), nullable=False)
     location = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(100), db.ForeignKey('city.city_name'), nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.Date)
     time = db.Column(db.Time, nullable=False)
     comments = db.Column(db.String(100))
+    position = db.Column(db.Integer, nullable=False)
 
 class City(db.Model):
     city_name = db.Column(db.String(100), primary_key=True)
@@ -45,3 +46,7 @@ class Accomodation(db.Model):
     morning = db.Column(db.Boolean, primary_key=True)
     location = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(100), db.ForeignKey('city.city_name'))
+
+class Sort(db.Model):
+    item_id = db.Column(db.Integer, db.ForeignKey('itinerary_items.item_id'), primary_key=True)
+    index = db.Column(db.Integer)

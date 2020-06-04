@@ -42,7 +42,7 @@ body {
     color: white; /* ADD THIS LINE */
 
     /* Background styles */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url("https://c.pshere.com/photos/71/52/conifer_daylight_desktop_wallpaper_dolomites_evergreen_fog_HD_wallpaper_lake-1000081.jpg!d");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.2)), url("https://c.pshere.com/photos/71/52/conifer_daylight_desktop_wallpaper_dolomites_evergreen_fog_HD_wallpaper_lake-1000081.jpg!d");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
