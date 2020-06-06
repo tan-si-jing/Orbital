@@ -29,7 +29,8 @@ def collection():
 def view(itnum):
     view = Shared_Permission.query.filter(and_(user_id==current_user.user_id, itinerary_id==itnum)).first()
     if view:
-        render_template('view.html', itinerary=view)
+        itn = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
+        render_template('view.html', itn_items=itn)
     else:
         render_template('error.html', message="You do not have permission to view this itinerary")
 
@@ -38,6 +39,7 @@ def view(itnum):
 def edit(itnum):
     edit = Shared_Permission.query.filter(and_(user_id==current_user.user_id, itinerary_id==itnum, edit==True)).first()
     if edit:
-        render_template('edit.html', itinerary=edit)
+        itn = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
+        render_template('edit.html', itn_items=itn)
     else:
         render_template('error.html', message="You do not have permission to edit this itinerary")
