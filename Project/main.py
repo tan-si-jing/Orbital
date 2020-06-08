@@ -27,19 +27,21 @@ def collection():
 @main.route('/view/<int:itnum>', methods=['GET'])
 @login_required
 def view(itnum):
-    view = Shared_Permission.query.filter(and_(user_id==current_user.user_id, itinerary_id==itnum)).first()
+    view = Shared_Permission.query.filter(user_id==current_user.user_id, itinerary_id==itnum).first()
     if view:
         itn = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
-        render_template('view.html', itn_items=itn)
+        name = Itinerary.query(Itinerary.name).filter_by(itnry_id=itnum).first()
+        render_template('view.html', itn_name=name, itn_items=itn)
     else:
         render_template('error.html', message="You do not have permission to view this itinerary")
 
 @main.route('/edit/<int:itnum>')
 @login_required
 def edit(itnum):
-    edit = Shared_Permission.query.filter(and_(user_id==current_user.user_id, itinerary_id==itnum, edit==True)).first()
+    edit = Shared_Permission.query.filter(user_id==current_user.user_id, itinerary_id==itnum, edit==True).first()
     if edit:
         itn = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
-        render_template('edit.html', itn_items=itn)
+        name = Itinerary.query(Itinerary.name).filter_by(itnry_id=itnum).first()
+        render_template('edit.html', itn_name=name, itn_items=itn)
     else:
         render_template('error.html', message="You do not have permission to edit this itinerary")
