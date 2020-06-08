@@ -169,30 +169,24 @@ input:-webkit-autofill {
 }
 
 .board-layout {
-      /* Background styles */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.2)), url("https://c.pshere.com/photos/71/52/conifer_daylight_desktop_wallpaper_dolomites_evergreen_fog_HD_wallpaper_lake-1000081.jpg!d");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
     display: grid;
     grid-template-rows: max-content auto;
     grid-gap: 10px;
     padding: 10px;
-    height:800px;
   }
+
 .list-layout {
     display: grid;
     grid-gap: 10px;
    
   }
+
 .board-text {
     font-weight: bold;
     font-size: 28px;
     padding: 5px;
   }
+
 .board-lists {
     display: grid;
     grid-auto-columns: 275px;
@@ -203,6 +197,7 @@ input:-webkit-autofill {
   }
   
   .board-list {
+    color: #000;
     background-color: rgb(235, 236, 240);
     border-radius: 3px;
     display: grid;
@@ -212,12 +207,15 @@ input:-webkit-autofill {
 height: max-content;
     padding: 10px;
   }
-  
+
   .list-title {
+    color: #000;
     font-size: 18px;
     font-weight: bold;
   }
+
 .card {
+    color: #000;
     background-color: white;
     border-radius: 3px;
     box-shadow: 0 1px 0 rgba(9,30,66,.25);
@@ -225,21 +223,4 @@ height: max-content;
     cursor:pointer;
   }
 
-  .board-layout {
-   /* Background styles */
-   background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.2)), url("https://c.pshere.com/photos/71/52/conifer_daylight_desktop_wallpaper_dolomites_evergreen_fog_HD_wallpaper_lake-1000081.jpg!d");
-   background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    display: grid;
-    grid-template-rows: max-content auto;
-    grid-gap: 10px;
-    padding: 10px;
-    height:800px;
-  }
 
-
-  
