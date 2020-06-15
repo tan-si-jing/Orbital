@@ -1,0 +1,42 @@
+{% extends "secondBase.html" %}
+
+{% block content %}
+<div class="board-layout">
+  <div class="board-text">{{ itn_name }}</div>
+  <div id='boardlists' class="board-lists">
+    <div id='list1' class="board-list" ondrop="dropIt(event)" ondragover="allowDrop(event)">
+      <div class="list-title">
+        To Do
+      </div>
+      <div  id='card1' class="card" draggable="true" ondragstart="dragStart(event)">
+        Work on article
+      </div>
+      <div id='card2' class="card" draggable="true" ondragstart="dragStart(event)">
+        Back up database
+      </div>
+      <div id='card3' class="card" draggable="true" ondragstart="dragStart(event)">
+        Build Lambda function
+      </div>
+      <div id='card4' class="card" draggable="true" ondragstart="dragStart(event)">
+        Work on course content
+      </div>
+      <div id='card5' class="card" draggable="true" ondragstart="dragStart(event)">
+        Debug SQL code
+      </div>
+    </div>
+
+    <div  id='list2' class="board-list" ondrop="dropIt(event)" ondragover="allowDrop(event)">
+      <div  class="list-title">
+        In Progress
+      </div>
+    </div>
+
+    <div  id='list3' class="board-list"  ondrop="dropIt(event)" ondragover="allowDrop(event)">
+      <div  class="list-title">
+        Done
+      </div>
+    </div>
+  </div>
+</div>
+<script src='dragdropswap.js'></script>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "secondBase.html" %}
+<h1>My Itineraries</h1>
+<ul>
+  {% for itn in itineraries %}
+      <li>{{ itn.name }}</li>
+  {% else %}
+      <h2>Nothing here yet... plan your next getaway with us!</h2>
+  {% endfor %}
+</ul>
+<a class="button-indv" href="edit.html"> Create itinerary </a>
+<input id="button" type="button" value="Create Itinerary" onclick="createItinerary()">
+<div id="d3">
+   <input type="text" onfocus="this.value=''" value="Name itinerary">
+</div>
+
+<script src='createItinerary.js'></script>
+
+{% block content %}
