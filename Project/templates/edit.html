@@ -2,11 +2,10 @@
 
 {% block content %}
 <h1>
-  {{itn.name}}
+  {{itn_items.name}}
   </h1>
   
-  <link rel= "stylesheet" type= "text/css" href= "itenerary.css">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel= "stylesheet" type= "text/css" href= "itinerary.css">
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
@@ -15,11 +14,15 @@
       <a id="btnCreateNewList" href="#" class="btn">Add Day </a>
   </div>
 
+  <script>
+    var date = '{{ itn.start_date }}';
+  </script>
+
   <div class="orders">
       <div class="column">
-          <div class="box" data-title="{{db.date}}">
+          <div class="box" data-title="{{itn.start_date}}">
               <div class="header">
-                  {{db.date}}
+                  {{itn.start_date}}
               </div>
               <div class="body">
                   <ul id="sortable1" class="droptrue">
@@ -33,7 +36,7 @@
       <div class="column">
           <div class="box" data-title="{{db.date2}}">
               <div class="header">
-                  {{db.date2}}
+                {{itn.start_date2}}
               </div>
               <div class="body">
                   <ul id="sortable2" class="dropfalse">
@@ -49,7 +52,7 @@
       <div class="column">
           <div class="box" data-title="{{db.date3}}">
               <div class="header">
-                  {{db.date3}}
+                {{itn.start_date3}}
               </div>
               <div class="body">
                   <ul id="sortable2" class="dropfalse">
@@ -78,9 +81,9 @@
 
               <label for="list"></label>
               <select id="list" name="list">
-                  <option value="{{db.date}}">{{db.date}}</option>
-                  <option value="{{db.date2}}">{{db.date2}}</option>
-                  <option value="{{db.date3}}">{{db.date3}}</option>
+                  <option value="{{itn.start_date}}">{{itn.start_date}}</option>
+                  <option value="{{itn.start_date2}}">{{itn.start_date2}}</option>
+                  <option value="{{itn.start_date3}}">{{itn.start_date3}}</option>
               </select>
 
               <!-- Allow form submission with keyboard without duplicating the dialog button -->
@@ -171,7 +174,7 @@
               width: 350,
               modal: true,
               buttons: {
-                  "Add new activity": addOrder,
+                  "Add activity": addOrder,
                   Cancel: function () {
                       dialog.dialog("close");
                   }
@@ -211,7 +214,7 @@
               width: 350,
               modal: true,
               buttons: {
-                  "Add new day": addList,
+                  "Add day": addList,
                   Cancel: function () {
                       dialogList.dialog("close");
                   }
