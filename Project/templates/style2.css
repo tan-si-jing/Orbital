@@ -19,7 +19,7 @@ header li {
 }
 
 header li a {
-    color: white;
+    color: #563b8c;
     text-decoration: none;
 }
 /*main*/
@@ -30,7 +30,6 @@ body {
 
 .hero {
     /* Sizing */
-    width: 100vw;
     height: 100vh;
 
     display: flex;
@@ -38,11 +37,12 @@ body {
     justify-content: center;
 
     /* Text styles */
-    text-align: center;
+    padding: 0px 50px;
     color: black; /* ADD THIS LINE */
 
     /* Background styles */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0)), url("https://i.ibb.co/9NS2CsQ/purple-pink-gradient-linear-1920x1080-c2-9370db-ffb6c1-a-45-f-14.png");
+    background-color: #eee3ff;
+    background-image: linear-gradient(315deg, #eee3ff 0%, #fffcff 74%);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -142,7 +142,7 @@ div {
   line-height: normal;
   text-align: center;
   display:table-cell;
-
+  font-size: 15px;
 }
 .ui-button-icon-only .ui-icon,
 .ui-button-text-icon-primary .ui-icon,
@@ -154,6 +154,13 @@ div {
 	margin-top: -8px;
 }
 
+.ui-widget-header {
+	color: #222222;
+}
+
+.ui-widget {
+	font-size: 1em;
+}
 
 .ui-button {
   /* Positioning and sizing */
@@ -163,13 +170,13 @@ div {
   border:1px white solid;
 
   /* Padding and margins */
-  padding: 6px 6px;
+  padding: 3px 3px;
   margin-left: auto;
-  margin-right: 25px;
+  margin-top: 6px;;
 
 
   /* Text styles */
-  color: black;
+  color: #563b8c;
   text-decoration: none;
   font-size: 17px;
   text-align: center;
@@ -181,12 +188,12 @@ div {
   border-radius: 50px;
 
   /* Background styles */
-  background-color: rgba(231, 234, 238, 0.8);
+  background-color: rgba(238, 227, 255, 0.8);
 
 }
 
 .ui-button:hover {
-    background-color: rgba(149, 152, 156,0.9);
+    background-color: rgba(149, 152, 156,0.2);
 }
 
 .ui.button-0 {
@@ -195,7 +202,3 @@ div {
 .uni.button-auto {
   margin-left:auto;
 }
-
-
-
-

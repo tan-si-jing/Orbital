@@ -3,7 +3,7 @@
 <h1> My Itineraries</h1>
 
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="create.css">
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="style2.css">
@@ -13,7 +13,7 @@
     <a id="btnCreateNewOrder" href="#" style="float: right;" class="btn"> + New itinerary</a>
 </div>
 
-    
+
 <br style="clear:both">
 
 <script src="countries.js"></script>
@@ -45,7 +45,7 @@
   <label for="endDate">End date:</label>
   <input type="date" id="endDate" name="endDate">
         </fieldset>
-      
+
     </form>
 </div>
 
@@ -121,9 +121,9 @@
             buttons: {
                 "Create itinerary": addOrder,
             },
-          
+
         });
-        
+
 
         //this didn't seem to affect code physically
         form = dialog.find("form").on("submit", function (event) {
@@ -150,9 +150,7 @@
     {% else %}
         <h2>Nothing here yet...plan your next getaway with us!</h2>
     {% endfor %}
-    
+
     </ul>
-    
-    
-    
+
 {% endblock %}
