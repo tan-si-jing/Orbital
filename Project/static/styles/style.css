@@ -39,7 +39,7 @@ body {
 
     /* Text styles */
     text-align: center;
-    color: white; /* ADD THIS LINE */
+    color: white;
 
     /* Background styles */
     background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.2)), url("https://c.pshere.com/photos/71/52/conifer_daylight_desktop_wallpaper_dolomites_evergreen_fog_HD_wallpaper_lake-1000081.jpg!d");
@@ -161,9 +161,59 @@ input:-webkit-autofill {
   border-radius: 20px;
 }
 
-.button-form:hover
-{
-    cursor: pointer;
-    background: #8ab3bd;
-    color: #000;
+.button-form:hover {
+  cursor: pointer;
+  background: #8ab3bd;
+  color: #000;
+}
+
+.board-layout {
+  font-size: 13px;
+  display: grid;
+  grid-template-rows: max-content auto;
+}
+
+.list-layout {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.board-text {
+  font-weight: bold;
+  font-size: 28px;
+  padding-top: 30px;
+}
+
+.board-lists {
+  display: grid;
+  grid-auto-columns: 245px;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  height: 400px;
+  padding: 30px 50px 30px 50px;
+}
+
+.board-list {
+  background-color: rgb(235, 236, 240);
+  border-radius: 3px;
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-gap: 10px;
+  height: max-content;
+  padding: 10px;
+}
+
+.list-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.card {
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9,30,66,.25);
+  padding: 10px;
+  cursor:pointer;
+  color: black;
 }

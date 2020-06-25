@@ -3,7 +3,7 @@
 
 <head>
     <title>Globetrotter</title>
-    <link rel= "stylesheet" type= "text/css" href= "style2.css">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style2.css') }}">
 </head>
 
 <body>
@@ -24,9 +24,158 @@
         </nav>
     </header>
     <section class="hero">
-        {% block content %}
-       
-        {% endblock %}
+      <h1> My Itineraries</h1>
+
+
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      <link rel="stylesheet" href="style2.css">
+
+
+      <div class="btnToolbar">
+          <a id="btnCreateNewOrder" href="#" style="float: right;" class="btn"> + New itinerary</a>
+      </div>
+
+
+      <br style="clear:both">
+
+      <script src="countries.js"></script>
+
+      <div id="dialog-form" title="Create new itinerary">
+          <form>
+              <fieldset>
+                  <label for="po">Itinerary name</label>
+                  <br>
+                  <input type="text" name="itnName" id="itnName" value="Enter name" class="text ui-widget-content ui-corner-all">
+
+
+      <div class="col-md-12">
+      <div class="col-md-6">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <br>
+          <label class="col-sm-2 control-label">Country</label>
+          <div class="col-sm-10">
+            <select class="form-control gds-cr" country-data-region-id="gds-cr-one" ></select>
+          </div>
+        </div>
+      </form>
+       <br>
+        <label for="startDate">Start date:</label>
+        <input type="date" id="startDate" name="startDate">
+        <br>
+        <br>
+        <label for="endDate">End date:</label>
+        <input type="date" id="endDate" name="endDate">
+              </fieldset>
+
+          </form>
+      </div>
+
+
+      <script>
+          $(function () {
+              function initSortable() {
+                  $(".column").sortable({
+                      connectWith: ".column",
+                      handle: ".header",
+      //                    cancel: ".header"
+      //                    placeholder: "portlet-placeholder ui-corner-all"
+                  });
+
+
+                  $("ul.droptrue").sortable({
+                      connectWith: "ul"
+                  });
+
+                  $("ul.dropfalse").sortable({
+                      connectWith: "ul",
+      //                    dropOnEmpty: false
+                  });
+
+                  $("#sortable1, #sortable2, #sortable3").disableSelection();
+              }
+
+              initSortable();
+
+              $(".btn")
+                      .button()
+                      .click(function (event) {
+                          event.preventDefault();
+                      });
+
+              function addOrder() {
+                  var valid = true;
+      //                    allFields.removeClass("ui-state-error");
+
+      //                    valid = valid && checkLength(name, "username", 3, 16);
+      //                    valid = valid && checkLength(email, "email", 6, 80);
+      //                    valid = valid && checkLength(password, "password", 5, 16);
+      //
+      //                    valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+      //                    valid = valid && checkRegexp(email, emailRegex, "eg. ui@jquery.com");
+      //                    valid = valid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+
+                  if (valid) {
+                      selectedList = $('#list').find(":selected").text();
+                      box = $('div').find("[data-title='" + selectedList + "']");
+                      boxList = box.find('ul');
+
+                      var itnName = $('#itnName').val();
+                      var country = $('#country').val();
+
+                      boxList.append("<li class=\"ui-state-highlight\">" + itnName + " - " + country + "</li>");
+
+      //                        $("#users tbody").append("<tr>" +
+      //                                "<td>" + name.val() + "</td>" +
+      //                                "<td>" + email.val() + "</td>" +
+      //                                "<td>" + password.val() + "</td>" +
+      //                                "</tr>");
+                      dialog.dialog("close");
+                  }
+                  return valid;
+              }
+
+              dialog = $("#dialog-form").dialog({
+                  autoOpen: false,
+                  height: 410,
+                  width: 550,
+                  modal: true,
+                  buttons: {
+                      "Create itinerary": addOrder,
+                  },
+
+              });
+
+
+              //this didn't seem to affect code physically
+              form = dialog.find("form").on("submit", function (event) {
+                  event.preventDefault();
+                  addOrder();
+              });
+
+              form = dialog.find("#formList").on("submit", function (event) {
+                  event.preventDefault();
+                  addList();
+              });
+      // to this part, even if deleted. Not sure what data it MAY affect
+              $("#btnCreateNewOrder").button().on("click", function () {
+                  dialog.dialog("open");
+              });
+
+          });
+
+      </script>
+
+        <ul>
+          {% for itn in itineraries %}
+              <li>{{ itn.name }}</li>
+          {% else %}
+              <h2>Nothing here yet...plan your next getaway with us!</h2>
+          {% endfor %}
+
+          </ul>
 
     </section>
 </body>

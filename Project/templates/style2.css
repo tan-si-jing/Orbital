@@ -142,7 +142,7 @@ div {
   line-height: normal;
   text-align: center;
   display:table-cell;
-  
+
 }
 .ui-button-icon-only .ui-icon,
 .ui-button-text-icon-primary .ui-icon,
@@ -158,8 +158,6 @@ div {
 .ui-button {
   /* Positioning and sizing */
   display: inline-block;
-  width: 150px;
-  overflow: auto;
   white-space: nowrap;
   margin:0px auto;
   border:1px white solid;
@@ -168,7 +166,7 @@ div {
   padding: 6px 6px;
   margin-left: auto;
   margin-right: 25px;
-  
+
 
   /* Text styles */
   color: black;
@@ -184,7 +182,7 @@ div {
 
   /* Background styles */
   background-color: rgba(231, 234, 238, 0.8);
-  
+
 }
 
 .ui-button:hover {

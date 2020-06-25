@@ -16,6 +16,7 @@ class Itinerary(db.Model):
     cities = db.relationship('Cities_Itin', lazy='subquery', backref=db.backref('itineraries', lazy=True))
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
+    numDays = db.Column(db.Integer, nullable=False)
     items = db.relationship('Itinerary_Items', backref='itin', lazy=True)
 
 class Shared_Permission(db.Model):
