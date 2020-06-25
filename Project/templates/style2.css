@@ -158,8 +158,8 @@ div {
 .ui-button {
   /* Positioning and sizing */
   display: inline-block;
-  width: 150px;
-  overflow: auto;
+  /* width: 150px;
+  overflow: auto; */
   white-space: nowrap;
   margin:0px auto;
   border:1px white solid;
