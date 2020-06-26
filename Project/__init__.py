@@ -23,6 +23,9 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    from .itn import itn as itn_blueprint
+    app.register_blueprint(itn_blueprint)
+
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)

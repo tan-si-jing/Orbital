@@ -28,6 +28,10 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+li {
+  text-decoration: none
+}
+
 .hero {
     /* Sizing */
     height: 100vh;
