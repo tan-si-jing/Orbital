@@ -42,7 +42,7 @@ body {
     color: black; /* ADD THIS LINE */
 
     /* Background styles */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url("bg.png");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.1)), url("bg.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -50,8 +50,7 @@ body {
 }
 
 img {
-  height: 350px;
-  padding-top: 50px;
+  height: 250px;
 }
 
 .hero h1{
@@ -62,8 +61,6 @@ img {
 
 .hero h3{
   font-weight: lighter;
-  color: white;
-  padding-top: none;
 }
 
 .hero .button-indv {
@@ -73,7 +70,7 @@ img {
 
     /* Padding and margins */
     padding: 16px 16px;
-    margin-top: 50px;
+    margin: 20px;
     margin-left: auto;
     margin-right: auto;
 
