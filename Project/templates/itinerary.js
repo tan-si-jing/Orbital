@@ -33,14 +33,14 @@ $(document).ready(function () {
                 });
 
         function addOrder() {
-            var name = $('#itnName').val();
-            var country = $('#form-control gds-cr').val();
-            var startDate = document.getElementById("startDate").value;
-            var endDate = document.getElementById("endDate").value;
+            var itnName = $('#itnName').val();
+            var country = $('#country option:selected').val();
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
             $.ajax({
               type: 'POST',
               data: {
-                name:name,
+                name:itnName,
                 country:country,
                 start_date:startDate,
                 end_date:endDate,
@@ -62,6 +62,8 @@ $(document).ready(function () {
 
         });
 
+
+        //this didn't seem to affect code physically
         form = dialog.find("form").on("submit", function (event) {
             event.preventDefault();
             addOrder();
@@ -71,7 +73,7 @@ $(document).ready(function () {
             event.preventDefault();
             addList();
         });
-
+// to this part, even if deleted. Not sure what data it MAY affect
         $("#btnCreateNewOrder").button().on("click", function () {
             dialog.dialog("open");
         });

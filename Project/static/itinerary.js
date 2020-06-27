@@ -34,22 +34,29 @@ $(document).ready(function () {
 
         function addOrder() {
             var itnName = $('#itnName').val();
-            var country = $('#form-control gds-cr').val();
+            var country = $('#country option:selected').val();
             var startDate = $('#startDate').val();
             var endDate = $('#endDate').val();
-            console.log(country, startDate, endDate);
-            $.ajax({
-              type: 'POST',
-              data: {
-                name:itnName,
-                country:country,
-                start_date:startDate,
-                end_date:endDate,
-              },
-              url: "/newItn"
+            var data = {
+              name:itnName,
+              country:country,
+              start_date:startDate,
+              end_date:endDate,
+            };
+            console.log(data);
+            fetch('/newItn', {
+              method: "POST",
+              credentials: "include",
+              body: JSON.stringify(data),
+              headers: new Headers({
+                "content-type": "application/json"
+              })
             })
-            dialog.dialog("close");
-            return true;
+            .then(response => {
+              if (response.redirected) {
+                window.location.href = response.url;
+              }
+            });
         }
 
         dialog = $("#dialog-form").dialog({

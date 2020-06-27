@@ -4,7 +4,7 @@
 <h1>
   {{itn_items.name}}
   </h1>
-  
+
   <link rel= "stylesheet" type= "text/css" href= "itinerary.css">
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -26,23 +26,23 @@
               </div>
               <div class="body">
                   <ul id="sortable1" class="droptrue">
-                      
-                      
+
+
                   </ul>
               </div>
           </div>
       </div>
 
       <div class="column">
-          <div class="box" data-title="{{db.date2}}">
+          <div class="box" data-title="2">
               <div class="header">
                 {{itn.start_date2}}
               </div>
               <div class="body">
                   <ul id="sortable2" class="dropfalse">
                       <li class="ui-state-highlight">Add activity this format
-                     
-                      
+
+
                   </ul>
               </div>
           </div>
@@ -50,23 +50,23 @@
       </div>
 
       <div class="column">
-          <div class="box" data-title="{{db.date3}}">
+          <div class="box" data-title="3">
               <div class="header">
                 {{itn.start_date3}}
               </div>
               <div class="body">
                   <ul id="sortable2" class="dropfalse">
-                      
-                      
+
+
                   </ul>
               </div>
           </div>
       </div>
 
 
-     
+
       <!--            <div class="column">
-      
+
                   </div>-->
   </div>
 
@@ -75,7 +75,7 @@
   <div id="dialog-form" title="Create new activity">
       <form>
           <fieldset>
-              
+
               <label for="company">Activity</label>
               <input type="text" name="company" id="company" value="" class="text ui-widget-content ui-corner-all">
 
@@ -153,7 +153,7 @@
                   box = $('div').find("[data-title='" + selectedList + "']");
                   boxList = box.find('ul');
 
-                  
+
                   var company = $('#company').val();
 
                   boxList.append("<li class=\"ui-state-highlight\">" + company + "</li>");

@@ -16,12 +16,13 @@ class Itinerary(db.Model):
     #cities = db.relationship('Cities_Itin', lazy='subquery', backref=db.backref('itineraries', lazy=True))
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
-    items = db.relationship('Itinerary_Items', backref='itin', lazy=True)
+    items = db.relationship('Itinerary_Items', backref='itnry', lazy=True)
 
 class Shared_Permission(db.Model):
     itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'), nullable=False, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, primary_key=True)
     edit = db.Column(db.Boolean)
+    itnry = db.relationship('Itinerary', backref='perms', lazy=True)
 
 class Itinerary_Items(db.Model):
     id = db.Column(db.Integer, primary_key=True)

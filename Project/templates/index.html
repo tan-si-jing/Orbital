@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Welcome to Trippy!</h1>
-  <h3>Planning itineraries have never been easier.</h3>
-  <a class="button-indv" href="{{ url_for('auth.login_post') }}">Get started!</a>
+  <div class="index">
+    <img src="{{url_for('static', filename='styles/Globetrotter.png')}}">
+  </div>
+    <h3>Planning itineraries has never been easier.</h3>
+    <a class="button-indv" href="{{ url_for('auth.login_post') }}">Get started!</a>
 {% endblock %}

@@ -42,20 +42,28 @@ body {
     color: black; /* ADD THIS LINE */
 
     /* Background styles */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0)), url("https://wallpaperplay.com/walls/full/7/2/9/20920.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), url("bg.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
+img {
+  height: 350px;
+  padding-top: 50px;
+}
+
 .hero h1{
   font-size: 40px;
   font-weight: lighter;
+  color: white;
 }
 
 .hero h3{
   font-weight: lighter;
+  color: white;
+  padding-top: none;
 }
 
 .hero .button-indv {
@@ -79,11 +87,11 @@ body {
     border-radius: 50px;
 
     /* Background styles */
-    background-color: rgba(149, 152, 156, 0.8);
+    background-color: rgba(149, 152, 156, 0.2);
 }
 
 .hero .button-indv:hover {
-  background-color: rgba(149, 152, 156,0.9);
+  background-color: rgba(149, 152, 156,0.4);
 }
 
 .box {
@@ -164,5 +172,3 @@ input:-webkit-autofill {
     background: #8ab3bd;
     color: #000;
 }
-
-
