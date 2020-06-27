@@ -1,4 +1,4 @@
-
+$(document).ready(function () {
     $(function () {
         function initSortable() {
             $(".column").sortable({
@@ -77,3 +77,4 @@
         });
 
     });
+});

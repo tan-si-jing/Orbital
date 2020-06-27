@@ -12,8 +12,8 @@ def newItn():
     name = request.form.get('name')
     creator = current_user.id
     country = request.form.get('country')
-    start_date = request.form.get('startDate')
-    end_date = request.form.get('endDate')
+    start_date = request.form.get('start_date')
+    end_date = request.form.get('end_date')
     new_itn = Itinerary(name=name, creator=creator, country=country, start_date=start_date, end_date=end_date)
     db.session.add(new_itn)
     db.session.commit()

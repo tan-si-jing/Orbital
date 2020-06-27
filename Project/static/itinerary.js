@@ -1,4 +1,4 @@
-
+$(document).ready(function () {
     $(function () {
         function initSortable() {
             $(".column").sortable({
@@ -37,6 +37,7 @@
             var country = $('#form-control gds-cr').val();
             var startDate = $('#startDate').val();
             var endDate = $('#endDate').val();
+            console.log(country, startDate, endDate);
             $.ajax({
               type: 'POST',
               data: {
@@ -79,3 +80,4 @@
         });
 
     });
+});
