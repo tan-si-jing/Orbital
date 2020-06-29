@@ -1,69 +1,32 @@
 {% extends "secondBase.html" %}
 
 {% block content %}
-<h1>
-  {{itn_items.name}}
-  </h1>
-  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<div class="itinerary">
 
   <div class="btnToolbar">
       <a id="btnCreateNewOrder" href="#" class="btn">Add Activity</a>
-      <a id="btnCreateNewList" href="#" class="btn">Add Day </a>
+      <a id="btnCreateNewList" href="#" class="btn">Share</a>
   </div>
-
+  <h1>{{itn.name}}</h1>
   <script>
-    var date = '{{ itn.start_date }}';
+    var startDate = '{{ itn.start_date }}';
   </script>
 
-  <div class="orders">
-      <div class="column">
-          <div class="box" data-title="{{itn.start_date}}">
-              <div class="header">
-                  {{itn.start_date}}
-              </div>
-              <div class="body">
-                  <ul id="sortable1" class="droptrue">
-
-
-                  </ul>
-              </div>
-          </div>
+<div id="inserts">
+  <div id="orders" class="orders">
+    <div class="column">
+      <div class="itnbox" data-title="{{itn.start_date}}">
+        <div class="header">
+          {{itn.start_date}}
+        </div>
+        <div class="body">
+          <ul id="sortable1" class="droptrue">
+          </ul>
+        </div>
       </div>
-
-      <div class="column">
-          <div class="box" data-title="2">
-              <div class="header">
-                {{itn.start_date2}}
-              </div>
-              <div class="body">
-                  <ul id="sortable2" class="dropfalse">
-                      <li class="ui-state-highlight">Add activity this format
-
-
-                  </ul>
-              </div>
-          </div>
-
-      </div>
-
-      <div class="column">
-          <div class="box" data-title="3">
-              <div class="header">
-                {{itn.start_date3}}
-              </div>
-              <div class="body">
-                  <ul id="sortable2" class="dropfalse">
-
-
-                  </ul>
-              </div>
-          </div>
-      </div>
-
-
-
+    </div>
   </div>
+</div>
 
   <br style="clear:both">
 
@@ -74,12 +37,18 @@
               <label for="company">Activity</label>
               <input type="text" name="company" id="company" value="" class="text ui-widget-content ui-corner-all">
 
-              <label for="list"></label>
-              <select id="list" name="list">
+              <div id="dateInput">
+                <label for="list">Date</label>
+                <select id="list" name="list">
                   <option value="{{itn.start_date}}">{{itn.start_date}}</option>
-                  <option value="{{itn.start_date2}}">{{itn.start_date2}}</option>
-                  <option value="{{itn.start_date3}}">{{itn.start_date3}}</option>
-              </select>
+                </select>
+              </div>
+
+              <label for="time">Time (optional)</label>
+              <input type="time" name="time" id="time" placeholder="Time" class="text ui-widget-content ui-corner-all">
+
+              <label for="comments">Comments (optional)</label>
+              <input type="text" name="comments" id="comments" placeholder="Comments" class="text ui-widget-content ui-corner-all">
 
               <!-- Allow form submission with keyboard without duplicating the dialog button -->
               <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
@@ -87,30 +56,22 @@
       </form>
   </div>
 
-  <div id="dialog-form-list" title="Add Day">
+  <div id="dialog-form-list" title="Share with others">
       <form id="formList">
           <fieldset>
-          <label for="date">Date</label>
-              <input type="date" name="listname" id="listname" value="Untitled" class="text ui-widget-content ui-corner-all">
-
-              <!-- Allow form submission with keyboard without duplicating the dialog button -->
+              <label for="listname">Email</label>
+              <input type="text" name="listname" id="listname" value="Untitled" class="text ui-widget-content ui-corner-all">
               <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
           </fieldset>
       </form>
   </div>
 
-
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src = "edit.js"></script>
   <script>
       $(function () {
           function initSortable() {
-              $(".column").sortable({
-                  connectWith: ".column",
-                  handle: ".header",
-//                    cancel: ".header"
-//                    placeholder: "portlet-placeholder ui-corner-all"
-              });
-
-
               $("ul.droptrue").sortable({
                   connectWith: "ul"
               });
@@ -133,7 +94,16 @@
 
           function addOrder() {
               var valid = true;
-//                  
+//                    allFields.removeClass("ui-state-error");
+
+//                    valid = valid && checkLength(name, "username", 3, 16);
+//                    valid = valid && checkLength(email, "email", 6, 80);
+//                    valid = valid && checkLength(password, "password", 5, 16);
+//
+//                    valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+//                    valid = valid && checkRegexp(email, emailRegex, "eg. ui@jquery.com");
+//                    valid = valid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+
               if (valid) {
                   selectedList = $('#list').find(":selected").text();
                   box = $('div').find("[data-title='" + selectedList + "']");
@@ -143,7 +113,12 @@
                   var company = $('#company').val();
 
                   boxList.append("<li class=\"ui-state-highlight\">" + company + "</li>");
-                
+
+//                        $("#users tbody").append("<tr>" +
+//                                "<td>" + name.val() + "</td>" +
+//                                "<td>" + email.val() + "</td>" +
+//                                "<td>" + password.val() + "</td>" +
+//                                "</tr>");
                   dialog.dialog("close");
               }
               return valid;
@@ -167,25 +142,6 @@
           });
 
           function addList() {
-              bodyWidth = $("body").width();
-              nextWidth = bodyWidth + 300;
-              $('body').css('width', nextWidth + 'px');
-
-              var listName = $('#listname').val();
-
-              $("div.orders").append("<div class=\"column\">" +
-                      "<div class=\"box\" data-title=\"" + listName + "\">" +
-                      "<div class=\"header\">" +
-                      "    " + listName +
-                      "</div>" +
-                      "<div class=\"body\">" +
-                      "    <ul id=\"sortable3\" class=\"droptrue\">" +
-                      "    </ul>" +
-                      "</div>" +
-                      "</div></div>");
-
-              initSortable();
-
               dialogList.dialog("close");
           }
 
@@ -195,7 +151,7 @@
               width: 350,
               modal: true,
               buttons: {
-                  "Add day": addList,
+                  "Share": addList,
                   Cancel: function () {
                       dialogList.dialog("close");
                   }
@@ -227,5 +183,5 @@
 
   </script>
 <script src='dragdropswap.js'></script>
-
+</div>
 {% endblock %}

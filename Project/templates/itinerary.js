@@ -43,7 +43,6 @@ $(document).ready(function () {
               start_date:startDate,
               end_date:endDate,
             };
-            console.log(data);
             fetch('/newItn', {
               method: "POST",
               credentials: "include",
