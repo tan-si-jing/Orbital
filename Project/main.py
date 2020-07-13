@@ -21,5 +21,9 @@ def home():
 @main.route('/itineraries') #show both shared with me and my own
 @login_required
 def collection():
+    mine = Itinerary.query.filter_by(creator=current_user.id).all()
     itn = Shared_Permission.query.filter_by(user_id=current_user.id).all()
-    return render_template('itineraries.html', itineraries=itn)
+    shared = []
+    for i in itn:
+        shared.append(Itinerary.query.filter_by(id=i).first())
+    return render_template('collections.html', mine=mine, shared=shared)

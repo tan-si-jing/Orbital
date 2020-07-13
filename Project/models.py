@@ -22,7 +22,8 @@ class Shared_Permission(db.Model):
     itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'), nullable=False, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, primary_key=True)
     edit = db.Column(db.Boolean)
-    itnry = db.relationship('Itinerary', backref='perms', lazy=True)
+    itnry = db.relationship('Itinerary', backref='perm', lazy=True)
+    user = db.relationship('User', backref='perm', lazy=True)
 
 class Itinerary_Items(db.Model):
     id = db.Column(db.Integer, primary_key=True)

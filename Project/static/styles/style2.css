@@ -26,7 +26,6 @@ header li a {
 body {
     margin: 0;
     font-family: "Poppins", sans-serif;
-    overflow-x: scroll;
 }
 
 li {
@@ -35,8 +34,6 @@ li {
 
 .hero {
     /* Sizing */
-    height: 100vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -127,8 +124,9 @@ li {
 
 
 .btnToolbar {
-  margin-bottom: 10px;
-  display: -webkit-inline-box;
+  margin: 30px 0px 0px;
+  display: inline-flex;
+  align-self: flex-end;
 }
 
 .itinerary {
@@ -136,16 +134,19 @@ li {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 50px;
 }
 
 .itinerary h1 {
   font-size: 30px;
-  padding-bottom: none;
 }
 
 div {
   display: block;
+}
+
+#inserts {
+  overflow: auto;
+  max-height: 365px;
 }
 
 .ui-button:hover {
@@ -181,9 +182,8 @@ div {
 
 
 div.itnbox {
-    width: 250px;
+    width: 170px;
     display: inline-block;
-    margin: 10px;
     background-color: #ffe3f0;
     border-radius: 10px;
 }
@@ -195,7 +195,7 @@ div.header {
 }
 
 .itnbox ul {
-    width: 240px;
+    width: 160px;
     display: inline-block;
     position: center;
 }
@@ -205,14 +205,18 @@ div.orders {
 }
 
 div.column {
-    width: 265px;
+    width: 175px;
     float: left;
     height: auto;
     margin: 2px;
-    min-height: 60vh;
+    min-height: 50vh;
 }
 
 label, input { display:block; }
 input.text { margin-bottom:12px; width:95%; padding: .4em; }
 fieldset { padding:0; border:0; margin-top:25px; }
 .ui-dialog .ui-state-error { padding: .3em; }
+
+#dateInput {
+  padding-bottom: 20px;
+}

@@ -1,31 +1,18 @@
 {% extends "secondBase.html" %}
 
 {% block content %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style2.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/create.css') }}">
 <div class="itinerary">
 
   <div class="btnToolbar">
       <a id="btnCreateNewOrder" href="#" class="btn">Add Activity</a>
-      <a id="btnCreateNewList" href="#" class="btn">Share</a>
+      <a id="sharebtn" href="#" class="btn">Share</a>
   </div>
   <h1>{{itn.name}}</h1>
-  <script>
-    var startDate = '{{ itn.start_date }}';
-  </script>
 
 <div id="inserts">
-  <div id="orders" class="orders">
-    <div class="column">
-      <div class="itnbox" data-title="{{itn.start_date}}">
-        <div class="header">
-          {{itn.start_date}}
-        </div>
-        <div class="body">
-          <ul id="sortable1" class="droptrue">
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="orders" class="orders"></div>
 </div>
 
   <br style="clear:both">
@@ -37,10 +24,12 @@
               <label for="company">Activity</label>
               <input type="text" name="company" id="company" value="" class="text ui-widget-content ui-corner-all">
 
+              <label for="time">Location</label>
+              <input type="text" name="location" id="location" placeholder="Location" class="text ui-widget-content ui-corner-all">
+
               <div id="dateInput">
                 <label for="list">Date</label>
                 <select id="list" name="list">
-                  <option value="{{itn.start_date}}">{{itn.start_date}}</option>
                 </select>
               </div>
 
@@ -56,11 +45,16 @@
       </form>
   </div>
 
-  <div id="dialog-form-list" title="Share with others">
-      <form id="formList">
+  <div id="share" title="Share with others">
+      <form id="shareform">
           <fieldset>
               <label for="listname">Email</label>
-              <input type="text" name="listname" id="listname" value="Untitled" class="text ui-widget-content ui-corner-all">
+              <input type="text" name="listname" id="email" placeholder="Email" class="text ui-widget-content ui-corner-all">
+              <label for="perm">Permissions</label>
+              <select id="perm" name="perm">
+                <option value="Edit">Edit</<option>
+                <option value="View">View</option>
+              </select>
               <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
           </fieldset>
       </form>
@@ -68,7 +62,9 @@
 
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src = "edit.js"></script>
+  <script src="{{ url_for('static', filename='edit.js') }}"></script>
+  <script src="{{ url_for('static', filename='share.js') }}"></script>
+  <script src="{{ url_for('static', filename='dragdropswap.js') }}"></script>
   <script>
       $(function () {
           function initSortable() {
@@ -78,7 +74,7 @@
 
               $("ul.dropfalse").sortable({
                   connectWith: "ul",
-//                    dropOnEmpty: false
+                  dropOnEmpty: false
               });
 
               $("#sortable1, #sortable2, #sortable3").disableSelection();
@@ -136,8 +132,8 @@
                   }
               },
               close: function () {
-//                        $("#dialog-form")[0].reset();
-//                        allFields.removeClass("ui-state-error");
+                $("#dialog-form")[0].reset();
+                allFields.removeClass("ui-state-error");
               }
           });
 
@@ -157,8 +153,8 @@
                   }
               },
               close: function () {
-//                        $("#dialog-form-list")[0].reset();
-//                        allFields.removeClass("ui-state-error");
+                $("#dialog-form-list")[0].reset();
+                allFields.removeClass("ui-state-error");
               }
           });
 
@@ -182,6 +178,5 @@
       });
 
   </script>
-<script src='dragdropswap.js'></script>
 </div>
 {% endblock %}

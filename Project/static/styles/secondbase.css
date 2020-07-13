@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/*nav*/
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+header * {
+    display: inline;
+}
+header li {
+    margin: 15px;
+}
+
+header li a {
+    color: white;
+    color: #563b8c;
+    text-decoration: none;
+}
+/*main*/
+body {
+    font-family: "Poppins", sans-serif;
+    /* Sizing */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* Text styles */
+    padding: 0px 50px;
+    color: black; /* ADD THIS LINE */
+
+    /* Background styles */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0)), url("https://i.ibb.co/9NS2CsQ/purple-pink-gradient-linear-1920x1080-c2-9370db-ffb6c1-a-45-f-14.png");
+    background-color: #eee3ff;
+    background-image: linear-gradient(315deg, #eee3ff 0%, #fffcff 74%);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin-top: 20px;
+    padding:1.25rem 2.5rem 1.25rem 1.5rem;
+}
+
+li {
+  list-style-type: none;
+}
