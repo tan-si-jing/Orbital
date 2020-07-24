@@ -2,10 +2,13 @@
 {% block content %}
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/createitnstyle.css') }}">
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/createitnstyle2.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/display.css') }}">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="{{ url_for('static', filename='itinerary.js') }}"></script>
 <script src="{{ url_for('static', filename='countries.js') }}"></script>
+<script src="{{ url_for('static', filename='display.js') }}"></script>
+
 <br style="clear:both">
 
 
@@ -48,15 +51,40 @@
 
 <ul>
   {% for itn in mine %}
-      <li>{{ itn.name }}</li>
+     <div class="cards-list">
+  
+    <div class="card 1">
+      <div class="card_image"> </div>
+      <div class="card_title title-white">
+      <p>{{itn.name}}</p>
+        <small>{{itn.country}}</small> <br>
+        <small> {{itn.start_date}} - {{itn.end_date}}</small>
+        
+      </div>
+    </div>
+       
+       
   {% else %}
       <h2>Nothing here yet...plan your next getaway with us!</h2>
   {% endfor %}
+       
 </ul>
 <h2 id="subheading" style="font-size:35px;">Shared with me:</h2>
 <ul>
   {% for itn in shared %}
-      <li>{{ itn.name }}</li>
+     <div class="cards-list">
+  
+    <div class="card 1">
+      <div class="card_image"> </div>
+      <div class="card_title title-white">
+      <p>{{itn.name}}</p>
+        <small>{{itn.country}}</small> <br>
+        <small> {{itn.start_date}} - {{itn.end_date}}</small>
+        
+      </div>
+    </div>
+       
+       
   {% else %}
       <h2>Nothing here~</h2>
   {% endfor %}
