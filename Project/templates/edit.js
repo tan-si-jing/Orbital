@@ -68,4 +68,11 @@ $(document).ready(function () {
 
 function Delete(currentEl){
   currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
+    $.ajax({
+        type: "DELETE",
+        url: '/delete_activity' + currentEl,
+        success: function () {
+            $('li').remove(currentEl);
+        }
+    }).then(res => console.log(res));
   }
