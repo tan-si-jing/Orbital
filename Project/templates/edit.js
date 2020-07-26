@@ -65,3 +65,7 @@ $(document).ready(function () {
 	}
 	document.getElementById("list").innerHTML = options;
 });
+
+function Delete(currentEl){
+  currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
+  }
