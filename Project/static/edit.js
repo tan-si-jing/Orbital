@@ -62,3 +62,16 @@ var listName = (`${day} ${date} ${mth} ${year}`)
   options += "<option>"+ listName +"</option>";
 }
 document.getElementById("list").innerHTML = options;
+
+
+function Delete(currentEl){
+  currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
+    $.ajax({
+        type: "DELETE",
+        url: '/delete_activity' + currentEl,
+        success: function () {
+            $('li').remove(currentEl);
+        }
+    }).then(res => console.log(res));
+  }
+
