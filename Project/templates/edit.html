@@ -175,7 +175,7 @@
             $.each(items, function(k,v) {
                box = $('div').find("[data-title='" + v.date + "']");
                boxList = box.find('ul');
-               boxList.append("<li data-index=" + v.id + " data-position=" + v.position + " class=\"ui-state-highlight\">" + v.name + "</li>");
+               boxList.append("<li data-index=" + v.id + " data-position=" + v.position + " class=\"ui-state-highlight\">" + v.name + '<button onclick="Delete(this);">x</button>' + "</li>");
             });
           });
 
@@ -262,7 +262,7 @@
                     position : pos
                   },  function(data){
                     var index = JSON.stringify(data.id);
-                    boxList.append("<li data-index=" + index + " data-position=0 class=\"ui-state-highlight\">" + name + "</li>");
+                    boxList.append("<li data-index=" + index + " data-position=0 class=\"ui-state-highlight\">" + name + '<button onclick="Delete(this);">x</button>' + "</li>");
       						  dialog.dialog("close");
                   })
       				}
@@ -329,6 +329,17 @@
       			});
       		}
         });
+
+        function Delete(currentEl){
+          currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
+            $.ajax({
+                type: "DELETE",
+                url: '/delete_activity' + currentEl,
+                success: function () {
+                    $('li').remove(currentEl);
+                }
+            }).then(res => console.log(res));
+          }
       });
   </script>
 </div>
