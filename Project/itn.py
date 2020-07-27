@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from flask_sqlalchemy import SQLAlchemy
 from .models import *
 from . import db
+import json
 
 itn = Blueprint('itn', __name__)
 
@@ -20,6 +21,45 @@ def newItn():
     db.session.commit()
     return redirect(url_for('itn.edit', itnum=new_itn.id))
 
+@itn.route('/newItem', methods=['POST'])
+@login_required
+def newItem():
+    name = request.form['name']
+    itnry_id = request.form['itnry_id']
+    location = request.form['location']
+    lat = request.form['lat']
+    long = request.form['long']
+    date = request.form['date']
+    time = request.form['time']
+    comments = request.form['comments']
+    position = request.form['position']
+    new_item = Itinerary_Items(name=name, itnry_id=itnry_id, location=location, lat=lat, long=long, date=date, time=time, comments=comments, position=position)
+    db.session.add(new_item)
+    db.session.commit()
+    return jsonify(id=new_item.id)
+
+@itn.route('/reorder', methods=['POST'])
+@login_required
+def reorder():
+    pos = request.form['pos']
+    pos = json.loads(pos)
+    for i in pos:
+        id = i[0]
+        item = Itinerary_Items.query.get(int(id))
+        item.position = i[1]
+    db.session.commit()
+    return jsonify(pos=pos)
+
+@itn.route('/otherList', methods=['POST'])
+@login_required
+def otherList():
+    id = request.form['id']
+    date = request.form['date']
+    item = Itinerary_Items.query.get(id)
+    item.date = date
+    db.session.commit()
+    return jsonify(id=id)
+
 @itn.route('/view/<int:itnum>', methods=['GET'])
 @login_required
 def view(itnum):
@@ -27,8 +67,7 @@ def view(itnum):
     itn = Itinerary.query.filter_by(id=itnum).first()
     owner = (current_user.id == itn.creator)
     if view or owner:
-        itn_items = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
-        return render_template('view.html', itn=itn, itn_items=itn_items)
+        return render_template('view.html', itn=itn)
     return render_template('error.html', message="You do not have permission to view this itinerary")
 
 @itn.route('/edit/<int:itnum>')
@@ -38,19 +77,26 @@ def edit(itnum):
     itn = Itinerary.query.filter_by(id=itnum).first()
     owner = (current_user.id == itn.creator)
     if edit or owner:
-        itn_items = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
-        return render_template('edit.html', itn=itn, itn_items=itn_items)
+        return render_template('edit.html', itn=itn)
     return render_template('error.html', message="You do not have permission to view this itinerary")
+
+@itn.route('/items/<int:itnum>', methods=['GET'])
+@login_required
+def items(itnum):
+    itn_items = Itinerary_Items.query.filter_by(itnry_id=itnum).order_by(Itinerary_Items.position).all()
+    all_items = [{'id':i.id,'name':i.name,'itnry_id':i.itnry_id, 'location':i.location, 'lat':i.lat, 'long':i.long, 'date':i.date, 'time':str(i.time), 'comments':i.comments, 'position':i.position} for i in itn_items]
+    return jsonify(all_items)
 
 @itn.route('/share_edit', methods=['POST'])
 @login_required
 def share_edit():
-    req = request.get_json()
-    email = req['email']
-    perm = req['perm']
-    itnum = req['itnum']
+    email = request.form['email']
+    perm = request.form['perm']
+    itnum = request.form['itnum']
     user = User.query.filter_by(email=email).first()
-    exists = Shared_Permission.query.filter((Shared_Permission.user_id==current_user.id) & (Shared_Permission.itnry_id==itnum)).first()
+    exists = Shared_Permission.query.filter(Shared_Permission.user_id==user.id, Shared_Permission.itnry_id==itnum).first()
+    print("bug")
+    print(exists)
     if exists:
         db.session.delete(exists)
         db.session.commit()
@@ -62,12 +108,11 @@ def share_edit():
 @itn.route('/share_view', methods=['POST'])
 @login_required
 def share_view():
-    req = request.get_json()
-    email = req['email']
-    perm = req['perm']
-    itnum = req['itnum']
+    email = request.form['email']
+    perm = request.form['perm']
+    itnum = request.form['itnum']
     user = User.query.filter_by(email=email).first()
-    exists = Shared_Permission.query.filter((Shared_Permission.user_id==current_user.id) & (Shared_Permission.itnry_id==itnum)).first()
+    exists = Shared_Permission.query.filter(Shared_Permission.user_id==user.id, Shared_Permission.itnry_id==itnum).first()
     if exists:
         db.session.delete(exists)
         db.session.commit()
@@ -75,8 +120,3 @@ def share_view():
     db.session.add(new)
     db.session.commit()
     return redirect(url_for('itn.edit', itnum=itnum))
-
-@itn.route('/data', methods=['POST'])
-@login_required
-def data():
-    req = request.get_json()

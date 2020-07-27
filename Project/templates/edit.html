@@ -12,13 +12,22 @@
   <h1>{{itn.name}}</h1>
 
 <div id="inserts">
-  <div id="orders" class="orders"></div>
+  <div id="orders" class="orders">
+    <div class="column">
+      <div class="itnbox" data-title="Sort" style="background-color:rgba(238, 227, 255);">
+        <div class="header">Sort</div>
+        <div class="body">
+          <ul id="sortable3" class="droptrue" data-title="Sort" style="background-color:rgba(238, 227, 255);"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
   <br style="clear:both">
 
   <div id="dialog-form" title="Create new activity">
-      <form>
+      <form id="d-form">
           <fieldset>
 
               <label for="company">Activity</label>
@@ -62,121 +71,265 @@
 
   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="{{ url_for('static', filename='edit.js') }}"></script>
-  <script src="{{ url_for('static', filename='share.js') }}"></script>
   <script src="{{ url_for('static', filename='dragdropswap.js') }}"></script>
-  <script>
-      $(function () {
-          function initSortable() {
-              $("ul.droptrue").sortable({
-                  connectWith: "ul"
-              });
+  <script type="text/javascript">
+      const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+      var sd = {{itn.start_date|tojson}};
+      var ed = {{itn.end_date|tojson}};
+      var startDate = new Date(sd);
+      const endDate = new Date(ed);
+      const numDays = Math.round(Math.abs((startDate - endDate) / oneDay));
 
-              $("ul.dropfalse").sortable({
-                  connectWith: "ul",
-                  dropOnEmpty: false
-              });
+      startDate.setDate(startDate.getDate());
+      var year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
+      var mth = new Intl.DateTimeFormat('en', { month: 'short' }).format(startDate);
+      var date = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
+      var day = new Intl.DateTimeFormat('en', { weekday: 'short' }).format(startDate);
 
-              $("#sortable1, #sortable2, #sortable3").disableSelection();
-          }
+      var listName = (`${day} ${date} ${mth} ${year}`)
 
-          initSortable();
+      var $clone = $($('#orders').html());
+      $('.start_date', $clone).text("hello");
+          $("#orders").append(
+         '<div class="column">' +
+           '<div class="itnbox"' +
+           ' data-title="' + listName + '">' +
+           '<div class="header">' +
+           "    " +
+           listName +
+           "</div>" +
+           '<div class="body">' +
+           '    <ul id="sortable3" class="droptrue"' +
+           ' data-title="' + listName + '">' +
+           "    </ul>" +
+           "</div></div></div>"
+       );
 
-          $(".btn")
-                  .button()
-                  .click(function (event) {
-                      event.preventDefault();
+      for (var i = 0; i < numDays ; i++) {
+
+          startDate.setDate(startDate.getDate() + 1);
+          var year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
+          var mth = new Intl.DateTimeFormat('en', { month: 'short' }).format(startDate);
+          var date = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
+          var day = new Intl.DateTimeFormat('en', { weekday: 'short' }).format(startDate);
+
+          var listName = (`${day} ${date} ${mth} ${year}`)
+
+           var $clone = $($('#orders').html());
+           $('.start_date', $clone).text("hello");
+               $("#orders").append(
+              '<div class="column">' +
+                '<div class="itnbox"' +
+                ' data-title="' + listName + '">' +
+                '<div class="header">' +
+                "    " +
+                listName +
+                "</div>" +
+                '<div class="body">' +
+                '    <ul id="sortable3" class="droptrue"' +
+                ' data-title="' + listName + '">' +
+                "    </ul>" +
+                "</div></div></div>"
+            );
+      }
+
+      var options = "<option>Sort</option>";
+      var startDate = new Date(sd);
+
+      startDate.setDate(startDate.getDate());
+      var year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
+      var mth = new Intl.DateTimeFormat('en', { month: 'short' }).format(startDate);
+      var date = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
+      var day = new Intl.DateTimeFormat('en', { weekday: 'short' }).format(startDate);
+
+      var listName = (`${day} ${date} ${mth} ${year}`)
+      options += "<option>"+ listName +"</option>";
+
+      for (var list = 0; list < numDays ; list++) {
+
+      startDate.setDate(startDate.getDate() + 1);
+      const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(startDate);
+      const mth = new Intl.DateTimeFormat('en', { month: 'short' }).format(startDate);
+      const date = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(startDate);
+      const day = new Intl.DateTimeFormat('en', { weekday: 'short' }).format(startDate);
+
+      var listName = (`${day} ${date} ${mth} ${year}`)
+      options += "<option>"+ listName +"</option>";
+      }
+      document.getElementById("list").innerHTML = options;
+
+      $(document).ready(function () {
+          $(function () {
+      		function initSortable() {
+      				$("ul.droptrue").sortable({
+      						connectWith: "ul"
+      				});
+      				$("#sortable3").disableSelection();
+      		}
+
+      		initSortable();
+
+          var id = JSON.stringify({{itn.id|tojson}});
+          $.get("/items/" + id, function( data ) {
+            items = data;
+            $.each(items, function(k,v) {
+               box = $('div').find("[data-title='" + v.date + "']");
+               boxList = box.find('ul');
+               boxList.append("<li data-index=" + v.id + " data-position=" + v.position + " class=\"ui-state-highlight\">" + v.name + "</li>");
+            });
+          });
+
+      		$(".btn")
+      						.button()
+      						.click(function (event) {
+      								event.preventDefault();
+      						});
+      		function share() {
+      				var email = $('#email').val();
+      				var perm = $('#perm option:selected').val();
+      				var itnum = {{itn.id|tojson}};
+      				var data = {
+      						email:email,
+      						perm:perm,
+      						itnum:itnum
+      					};
+      					if (perm == "Edit") {
+                  $.post("/share_edit", data,  function(response){
+      						  dialog.dialog("close");
+                    alert("Shared succesfully!");
                   });
+      					} else {
+                  $.post("/share_edit", data,  function(response){
+      						  dialog.dialog("close");
+                    alert("Shared succesfully!");
+                  });
+      					}
+      				}
 
-          function addOrder() {
-              var valid = true;
-//                    allFields.removeClass("ui-state-error");
+      				dialogshare = $("#share").dialog({
+      						autoOpen: false,
+      						height: 250,
+      						width: 350,
+      						modal: true,
+      						buttons: {
+      								"Share": share,
+      								Cancel: function () {
+      										dialogshare.dialog("close");
+      								}
+      						},
+      						close: function () {
+      							$("#share")[0].reset();
+      						}
+      				});
 
-//                    valid = valid && checkLength(name, "username", 3, 16);
-//                    valid = valid && checkLength(email, "email", 6, 80);
-//                    valid = valid && checkLength(password, "password", 5, 16);
-//
-//                    valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
-//                    valid = valid && checkRegexp(email, emailRegex, "eg. ui@jquery.com");
-//                    valid = valid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+      				form = dialogshare.find("#shareform").on("submit", function (event) {
+      						event.preventDefault();
+      						share();
+      				});
 
-              if (valid) {
-                  selectedList = $('#list').find(":selected").text();
-                  box = $('div').find("[data-title='" + selectedList + "']");
-                  boxList = box.find('ul');
+      				$("#sharebtn").button().on("click", function () {
+      						dialogshare.dialog("open");
+      				});
 
+      		function addOrder() {
+      				var valid = true;
+      //            valid = valid && checkLength(name, "username", 3, 16);
+      //            valid = valid && checkLength(email, "email", 6, 80);
+      //            valid = valid && checkLength(password, "password", 5, 16);
 
-                  var company = $('#company').val();
+      				if (valid) {
+      						date = $('#list').find(":selected").text();
+      						box = $('div').find("[data-title='" + date + "']");
+      						boxList = box.find('ul');
+      						var name = $('#company').val();
+                  var itnry_id = {{itn.id|tojson}};
+                  var loc = $('#location').val();
+                  var lat = 0;
+                  var long = 0;
+                  var date = $('#list').val();
+                  var time = $('#time').val();
+                  var com = $('#comments').val();
+                  var pos = 0
+                  $.post("/newItem", {
+                    name: name,
+                    itnry_id: itnry_id,
+                    location: loc,
+                    lat: lat,
+                    long: long,
+                    date: date,
+                    time: time,
+                    comments: com,
+                    position : pos
+                  },  function(data){
+                    var index = JSON.stringify(data.id);
+                    boxList.append("<li data-index=" + index + " data-position=0 class=\"ui-state-highlight\">" + name + "</li>");
+      						  dialog.dialog("close");
+                  })
+      				}
+      				return valid;
+      		}
 
-                  boxList.append("<li class=\"ui-state-highlight\">" + company + "</li>");
+      		dialog = $("#dialog-form").dialog({
+      				autoOpen: false,
+      				height: 380,
+      				width: 350,
+      				modal: true,
+      				buttons: {
+      						"Add activity": addOrder,
+      						Cancel: function () {
+      								dialog.dialog("close");
+      						}
+      				},
+      				close: function () {
+      					$("#d-form")[0].reset();
+      				}
+      		});
 
-//                        $("#users tbody").append("<tr>" +
-//                                "<td>" + name.val() + "</td>" +
-//                                "<td>" + email.val() + "</td>" +
-//                                "<td>" + password.val() + "</td>" +
-//                                "</tr>");
-                  dialog.dialog("close");
-              }
-              return valid;
-          }
+      		form = dialog.find("form").on("submit", function (event) {
+      				event.preventDefault();
+      				addOrder();
+      		});
 
-          dialog = $("#dialog-form").dialog({
-              autoOpen: false,
-              height: 380,
-              width: 350,
-              modal: true,
-              buttons: {
-                  "Add activity": addOrder,
-                  Cancel: function () {
-                      dialog.dialog("close");
-                  }
-              },
-              close: function () {
-                $("#dialog-form")[0].reset();
-                allFields.removeClass("ui-state-error");
-              }
-          });
+      		$("#btnCreateNewOrder").button().on("click", function () {
+      				dialog.dialog("open");
+      		});
 
-          function addList() {
-              dialogList.dialog("close");
-          }
+      		//<tr data-index="item.id" data-position="{item.position}">
 
-          dialogList = $("#dialog-form-list").dialog({
-              autoOpen: false,
-              height: 250,
-              width: 350,
-              modal: true,
-              buttons: {
-                  "Share": addList,
-                  Cancel: function () {
-                      dialogList.dialog("close");
-                  }
-              },
-              close: function () {
-                $("#dialog-form-list")[0].reset();
-                allFields.removeClass("ui-state-error");
-              }
-          });
+      		$("ul.droptrue").sortable({
+      			update: function(event, ui){
+      				$(this).children().each(function(index){
+      					if ($(this).attr('data-position') != (index+1)) {
+      						$(this).attr('data-position',(index+1)).addClass('updated');
+      					}
+      				});
+      				saveNewPositions();
+      			},
+            receive: function(event, ui) {
+              $.ajax({
+        				url:"/otherList",
+        				method: 'POST',
+        				dataType: 'text',
+        				data: {id: ui.item.attr('data-index'), date: $(this).attr('data-title')}
+        			});
+            }
+      		});
 
-          form = dialog.find("form").on("submit", function (event) {
-              event.preventDefault();
-              addOrder();
-          });
-
-          form = dialog.find("#formList").on("submit", function (event) {
-              event.preventDefault();
-              addList();
-          });
-
-          $("#btnCreateNewOrder").button().on("click", function () {
-              dialog.dialog("open");
-          });
-
-          $("#btnCreateNewList").button().on("click", function () {
-              dialogList.dialog("open");
-          });
+      		function saveNewPositions() {
+      			var positions =[];
+      			$('.updated').each(function(){
+      				positions.push([$(this).attr('data-index'), $(this).attr('data-position')]);
+      				$(this).removeClass('updated');
+      			});
+      			$.ajax({
+      				url:"/reorder",
+      				method: 'POST',
+      				dataType: 'text',
+      				data: {pos: JSON.stringify(positions)},
+      			});
+      		}
+        });
       });
-
   </script>
 </div>
 {% endblock %}

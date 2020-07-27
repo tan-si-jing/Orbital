@@ -1,31 +1,5 @@
 $(document).ready(function () {
     $(function () {
-        function initSortable() {
-            $(".column").sortable({
-                connectWith: ".column",
-                handle: ".header",
-                tolerance: 'intersect'
-//                    cancel: ".header"
-//                    placeholder: "portlet-placeholder ui-corner-all"
-            });
-
-
-            $("ul.droptrue").sortable({
-                connectWith: "ul",
-                tolerance: 'intersect'
-            });
-
-            $("ul.dropfalse").sortable({
-                connectWith: "ul",
-                tolerance: 'intersect'
-//                    dropOnEmpty: false
-            });
-
-            $("#sortable1, #sortable2, #sortable3").disableSelection();
-        }
-
-        initSortable();
-
         $(".btn")
                 .button()
                 .click(function (event) {
@@ -70,17 +44,11 @@ $(document).ready(function () {
         });
 
 
-        //this didn't seem to affect code physically
         form = dialog.find("form").on("submit", function (event) {
             event.preventDefault();
             addOrder();
         });
 
-        form = dialog.find("#formList").on("submit", function (event) {
-            event.preventDefault();
-            addList();
-        });
-// to this part, even if deleted. Not sure what data it MAY affect
         $("#btnCreateNewOrder").button().on("click", function () {
             dialog.dialog("open");
         });

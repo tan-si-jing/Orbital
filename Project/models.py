@@ -30,24 +30,16 @@ class Itinerary_Items(db.Model):
     name = db.Column(db.String(100), nullable=False)
     itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'), nullable=False)
     location = db.Column(db.String(100), nullable=False)
-    #city = db.Column(db.String(100), db.ForeignKey('cities_itin.city'), nullable=False)
-    date = db.Column(db.Date)
+    lat = db.Column(db.Integer, nullable=False)
+    long = db.Column(db.Integer, nullable=False)
+#    __table_args__ = (db.ForeignKeyConstraint(['lat', 'long'], ['location.lat', 'location.long']),)
+    date = db.Column(db.String(100), nullable=False)
     time = db.Column(db.Time)
     comments = db.Column(db.String(100))
     position = db.Column(db.Integer, nullable=False)
 
-#class Cities_Itin(db.Model):
-#    city = db.Column(db.String(100), primary_key=True)
-#    country = db.Column(db.String(100), primary_key=True)
-#    itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'), primary_key=True)
-
-#class Accomodation(db.Model):
-#    itnry_id = db.Column(db.Integer, db.ForeignKey('itinerary.id'), primary_key=True)
-#    date = db.Column(db.Date, nullable=False, primary_key=True)
-#    morning = db.Column(db.Boolean, primary_key=True)
-#    location = db.Column(db.String(100), nullable=False)
-#    city = db.Column(db.String(100))
-
-#class Sort(db.Model):
-#    item_id = db.Column(db.Integer, db.ForeignKey('itinerary_items.id'), primary_key=True)
-#    index = db.Column(db.Integer)
+#class Location(db.Model):
+#    name = db.Column(db.String(100), nullable=False)
+#    lat = db.Column(db.Integer, primary_key=True)
+#    long = db.Column(db.Integer, primary_key=True)
+#    items = db.relationship('Itinerary_Items', backref='place', lazy=True)
