@@ -23,7 +23,5 @@ def home():
 def collection():
     mine = Itinerary.query.filter_by(creator=current_user.id).all()
     itn = Shared_Permission.query.filter_by(user_id=current_user.id).all()
-    shared = []
-    for i in itn:
-        shared.append(Itinerary.query.filter_by(id=i).first())
+    shared = Itinerary.query.get(3)
     return render_template('collections.html', mine=mine, shared=shared)

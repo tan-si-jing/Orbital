@@ -1,17 +1,16 @@
 .cards-list {
   z-index: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
+  display: inline-flex;
   flex-wrap: wrap;
+  margin: 0px 25px;
 }
 
 .card {
-  margin: 30px auto;
-  width: 230px;
-  height: 230px;
+  margin: 15px;
+  width: 165px;
+  height: 165px;
   border-radius: 40px;
-  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.22), -1px -1px 20px 0px rgba(0,0,0,0.22);
   cursor: pointer;
   transition: 0.3s;
   background-image: url('https://i.ibb.co/2SFNMSC/train-ride.png');
@@ -36,15 +35,15 @@
   text-align: left;
   border-radius: 0px 0px 40px 40px;
   font-weight: bold;
-  font-size: 27px;
+  font-size: 17px;
   color: black;
-  margin-top: -210px;
-  height: 40px;
+  margin-top: -155px;
+  margin-left: 13px;
 }
 
 .card:hover {
   transform: scale(0.9, 0.9);
-  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25),
     -5px -5px 30px 15px rgba(0,0,0,0.22);
   background-image: url('https://cdn.dribbble.com/users/288987/screenshots/1898478/train-ride.gif');
 }
@@ -77,31 +76,33 @@
 @media screen and (min-width: 40em) {
     .cards {
    }
- 
+
     .card {
     }
 }
- 
+
 @media screen and (min-width: 60em) {
     .cards {
    }
-     
+
     .card {
      }
 }
- 
- 
+
+
 @media screen and (min-width: 52em) {
     .centered {
-        
     }
 }
 
 p {
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-bottom: 0px;
 }
 
-small{
-  margin:0px 20px 20px 0px;
+small {
+  font-weight: lighter;
+}
+
+ul {
+  padding-left: 0px;
 }

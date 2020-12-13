@@ -64,7 +64,7 @@ def otherList():
 @login_required
 def view(itnum):
     view = Shared_Permission.query.filter((Shared_Permission.user_id==current_user.id) & (Shared_Permission.itnry_id==itnum)).first()
-    itn = Itinerary.query.filter_by(id=itnum).first()
+    itn = Itinerary.query.get(itnum)
     owner = (current_user.id == itn.creator)
     if view or owner:
         return render_template('view.html', itn=itn)
@@ -74,7 +74,7 @@ def view(itnum):
 @login_required
 def edit(itnum):
     edit = Shared_Permission.query.filter((Shared_Permission.user_id==current_user.id) & (Shared_Permission.itnry_id==itnum) & (Shared_Permission.edit==True)).first()
-    itn = Itinerary.query.filter_by(id=itnum).first()
+    itn = Itinerary.query.get(itnum)
     owner = (current_user.id == itn.creator)
     if edit or owner:
         return render_template('edit.html', itn=itn)
@@ -95,8 +95,6 @@ def share_edit():
     itnum = request.form['itnum']
     user = User.query.filter_by(email=email).first()
     exists = Shared_Permission.query.filter(Shared_Permission.user_id==user.id, Shared_Permission.itnry_id==itnum).first()
-    print("bug")
-    print(exists)
     if exists:
         db.session.delete(exists)
         db.session.commit()
@@ -120,3 +118,17 @@ def share_view():
     db.session.add(new)
     db.session.commit()
     return redirect(url_for('itn.edit', itnum=itnum))
+
+@itn.route('/sort', methods=['POST'])
+@login_required
+def sort():
+    gbtb = Itinerary_Items.query.get(3)
+    sgz = Itinerary_Items.query.get(4)
+    nus = Itinerary_Items.query.get(2)
+    cap = Itinerary_Items.query.get(1)
+    gbtb.position = 3
+    sgz.position = 2
+    nus.position = 1
+    cap.position = 4
+    db.session.commit()
+    return redirect(url_for('itn.edit', itnum=3))

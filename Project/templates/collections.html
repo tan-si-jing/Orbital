@@ -50,43 +50,35 @@
 
 
 <ul>
+  <div class="cards-list">
   {% for itn in mine %}
-     <div class="cards-list">
-  
-    <div class="card 1">
-      <div class="card_image"> </div>
+      <div class="card">
+      <div class="card_image"></div>
       <div class="card_title title-white">
-      <p>{{itn.name}}</p>
-        <small>{{itn.country}}</small> <br>
-        <small> {{itn.start_date}} - {{itn.end_date}}</small>
-        
+        <a href="{{url_for('itn.edit',itnum=itn.id)}}" style="display:block;width:165px;height:115px;text-decoration:none;color:black;">
+          <p>{{itn.name}}</p>
+          <small>{{itn.country}}</small><br>
+          <small> {{itn.start_date}} to {{itn.end_date}}</small>
+        </a>
       </div>
     </div>
-       
-       
+
+
   {% else %}
       <h2>Nothing here yet...plan your next getaway with us!</h2>
   {% endfor %}
-       
+
 </ul>
 <h2 id="subheading" style="font-size:35px;">Shared with me:</h2>
 <ul>
-  {% for itn in shared %}
-     <div class="cards-list">
-  
-    <div class="card 1">
+  <div class="cards-list">
+    <div class="card">
       <div class="card_image"> </div>
       <div class="card_title title-white">
-      <p>{{itn.name}}</p>
-        <small>{{itn.country}}</small> <br>
-        <small> {{itn.start_date}} - {{itn.end_date}}</small>
-        
+      <p>{{shared.name}}</p>
+        <small>{{shared.country}}</small> <br>
+        <small> {{shared.start_date}} - {{shared.end_date}}</small>
       </div>
     </div>
-       
-       
-  {% else %}
-      <h2>Nothing here~</h2>
-  {% endfor %}
 </ul>
 {% endblock %}

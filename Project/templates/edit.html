@@ -6,6 +6,7 @@
 <div class="itinerary">
 
   <div class="btnToolbar">
+      <a id="sortbtn" href="#" class="btn" onclick="Sort();">Sort</a>
       <a id="btnCreateNewOrder" href="#" class="btn">Add Activity</a>
       <a id="sharebtn" href="#" class="btn">Share</a>
   </div>
@@ -158,6 +159,34 @@
       }
       document.getElementById("list").innerHTML = options;
 
+      function del(currentEl){
+        currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
+        console.log(currentEl);
+          $.ajax({
+              type: "post",
+              url: '/del_item' + currentEl,
+              success: function () {
+                  $('li').remove(currentEl);
+              }
+          }).then(res => console.log(res));
+        }
+
+      function Sort() {
+        fetch('/sort', {
+          method: "POST",
+          credentials: "include",
+          body: "hi",
+          headers: new Headers({
+            "content-type": "application/json"
+          })
+        })
+        .then(response => {
+          if (response.redirected) {
+            window.location.href = response.url;
+          }
+        });
+      }
+
       $(document).ready(function () {
           $(function () {
       		function initSortable() {
@@ -175,7 +204,7 @@
             $.each(items, function(k,v) {
                box = $('div').find("[data-title='" + v.date + "']");
                boxList = box.find('ul');
-               boxList.append("<li data-index=" + v.id + " data-position=" + v.position + " class=\"ui-state-highlight\">" + v.name + '<button onclick="Delete(this);">x</button>' + "</li>");
+               boxList.append("<li data-index=" + v.id + " data-position=" + v.position + " class=\"ui-state-highlight\">" + v.name + '<button onclick="del(this);">x</button>' + "</li>");
             });
           });
 
@@ -262,7 +291,7 @@
                     position : pos
                   },  function(data){
                     var index = JSON.stringify(data.id);
-                    boxList.append("<li data-index=" + index + " data-position=0 class=\"ui-state-highlight\">" + name + '<button onclick="Delete(this);">x</button>' + "</li>");
+                    boxList.append("<li data-index=" + index + " data-position=0 class=\"ui-state-highlight\">" + name + '<button onclick="del(this);">x</button>' + "</li>");
       						  dialog.dialog("close");
                   })
       				}
@@ -329,17 +358,6 @@
       			});
       		}
         });
-
-        function Delete(currentEl){
-          currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
-            $.ajax({
-                type: "DELETE",
-                url: '/delete_activity' + currentEl,
-                success: function () {
-                    $('li').remove(currentEl);
-                }
-            }).then(res => console.log(res));
-          }
       });
   </script>
 </div>
