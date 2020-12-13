@@ -3,7 +3,7 @@
 
 <head>
     <title>Globetrotter</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/secondbase.css') }}">
 </head>
 
 <body>
@@ -24,10 +24,8 @@
         </nav>
     </header>
     <section class="hero">
-        {% block content %}
-
-        {% endblock %}
-
+      {% block content %}
+      {% endblock %}
     </section>
 </body>
 

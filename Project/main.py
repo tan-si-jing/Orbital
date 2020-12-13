@@ -21,25 +21,7 @@ def home():
 @main.route('/itineraries') #show both shared with me and my own
 @login_required
 def collection():
+    mine = Itinerary.query.filter_by(creator=current_user.id).all()
     itn = Shared_Permission.query.filter_by(user_id=current_user.id).all()
-    return render_template('collection.html', itineraries=itn)
-
-@main.route('/view/<int:itnum>', methods=['GET'])
-@login_required
-def view(itnum):
-    view = Shared_Permission.query.filter(and_(user_id==current_user.user_id, itinerary_id==itnum)).first()
-    if view:
-        itn = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
-        render_template('view.html', itn_items=itn)
-    else:
-        render_template('error.html', message="You do not have permission to view this itinerary")
-
-@main.route('/edit/<int:itnum>')
-@login_required
-def edit(itnum):
-    edit = Shared_Permission.query.filter(and_(user_id==current_user.user_id, itinerary_id==itnum, edit==True)).first()
-    if edit:
-        itn = Itinerary_Items.query.filter_by(itnry_id=itnum).all()
-        render_template('edit.html', itn_items=itn)
-    else:
-        render_template('error.html', message="You do not have permission to edit this itinerary")
+    shared = Itinerary.query.get(3)
+    return render_template('collections.html', mine=mine, shared=shared)

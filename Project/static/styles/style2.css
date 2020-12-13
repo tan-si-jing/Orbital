@@ -19,7 +19,7 @@ header li {
 }
 
 header li a {
-    color: white;
+    color: #563b8c;
     text-decoration: none;
 }
 /*main*/
@@ -28,35 +28,31 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+li {
+  text-decoration: none
+}
+
 .hero {
     /* Sizing */
-    width: 100vw;
-    height: 100vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
 
     /* Text styles */
-    text-align: center;
+    padding: 0px 50px;
     color: black; /* ADD THIS LINE */
 
     /* Background styles */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.1)), url("bg.png");
-    background-size: cover;
+    background-color: #eee3ff;
+    background-image: linear-gradient(315deg, #eee3ff 0%, #fffcff 74%);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-img {
-  height: 250px;
-}
-
 .hero h1{
   font-size: 40px;
   font-weight: lighter;
-  color: white;
 }
 
 .hero h3{
@@ -70,7 +66,7 @@ img {
 
     /* Padding and margins */
     padding: 16px 16px;
-    margin: 20px;
+    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
 
@@ -84,11 +80,11 @@ img {
     border-radius: 50px;
 
     /* Background styles */
-    background-color: rgba(149, 152, 156, 0.2);
+    background-color: rgba(149, 152, 156, 0.8);
 }
 
 .hero .button-indv:hover {
-  background-color: rgba(149, 152, 156,0.4);
+  background-color: rgba(149, 152, 156,0.9);
 }
 
 .box {
@@ -126,46 +122,102 @@ img {
   padding:1.25rem 2.5rem 1.25rem 1.5rem;
 }
 
-.field input[type="text"], input[type="password"], input[type="email"], button{
-    width: 100%;
-    margin-bottom: 5px;
+
+.btnToolbar {
+  margin: 30px 0px 0px;
+  display: inline-flex;
+  align-self: flex-end;
 }
 
-.control input[type="text"], input[type="password"], input[type="email"]{
-    padding-top: 10px;
-    border: none;
-    border-bottom: 1px solid #fff;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: #fff;
-    font-size: 16px;
+.itinerary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-}
-input:-webkit-autofill {
-    -webkit-text-fill-color: white;
+.itinerary h1 {
+  font-size: 30px;
 }
 
-.button-form {
-  margin-top: 30px;
-  border: none;
-  outline: none;
-  height: 40px;
-  background: #a5bdc9;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 20px;
+div {
+  display: block;
 }
 
-.button-form:hover
-{
+#inserts {
+  overflow: auto;
+  max-height: 365px;
+}
+
+.ui-button:hover {
+    background-color: rgba(149, 152, 156,0.2);
+}
+
+.ui.button-0 {
+  margin-right: 0;
+}
+.uni.button-auto {
+  margin-left:auto;
+}
+
+#sortable1, #sortable2, #sortable3 {
+    list-style-type: none;
+    margin: 0;
+    float: left;
+    background: #ffe3f0;
+    padding: 5px;
+    border-radius: 10px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#sortable1 li, #sortable2 li, #sortable3 li {
+    margin: 5px;
+    padding: 5px;
+    font-size: 1em;
+    border-radius: 10px;
     cursor: pointer;
-    background: #8ab3bd;
-    color: #000;
+    list-style-type:none;
+}
+
+
+div.itnbox {
+    width: 170px;
+    display: inline-block;
+    background-color: #ffe3f0;
+    border-radius: 10px;
+}
+
+div.header {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 5px 5px;
+}
+
+.itnbox ul {
+    width: 160px;
+    display: inline-block;
+    position: center;
+}
+
+div.column {
+    width: 175px;
+    float: left;
+    height: auto;
+    margin: 2px;
+    min-height: 50vh;
+}
+
+label, input { display:block; }
+input.text { margin-bottom:12px; width:95%; padding: .4em; }
+fieldset { padding:0; border:0; margin-top:25px; }
+.ui-dialog .ui-state-error { padding: .3em; }
+
+#dateInput {
+  padding-bottom: 20px;
+}
+
+button {
+  background-color: #fbf9ee;
+  margin-left: 10px;
 }

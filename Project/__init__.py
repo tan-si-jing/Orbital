@@ -9,9 +9,8 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'tansijing'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:orbital2020@orbital.cczwsyqj7zab.ap-southeast-1.rds.amazonaws.com/Orbital'
-    #'mysql://sql12344295:IG4T3KWwt4@sql12.freemysqlhosting.net/sql12344295'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:T0041833h~@127.0.0.1:3306/orbital'
 
     db.init_app(app)
 
@@ -22,6 +21,9 @@ def create_app():
     # blueprint for non-auth parts of app
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    from .itn import itn as itn_blueprint
+    app.register_blueprint(itn_blueprint)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
