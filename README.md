@@ -79,3 +79,6 @@ Creation of itineraries:
 - jQuery and AJAX
 - Flask
 - MySQL
+
+# Project Video
+https://vimeo.com/442115748
